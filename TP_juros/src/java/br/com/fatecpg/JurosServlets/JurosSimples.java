@@ -46,7 +46,7 @@ public class JurosSimples extends HttpServlet {
                         out.println("h3 { margin-left: 0px; font-size: 22px; line-height: 30px; }");
                         out.println("b { margin-left: 0px; font-size: 22px; }");
                         out.println(".formulario { background-color: #E6E6E6; margin: 10px 180px 0 180px; border: 1px solid darkblue; padding: 10px 10px 40px 40px; font-family: Trebuchet MS; }");
-                        out.println(".resposta { font-size: 32px; font-weigth: bold; color: #8A0808; }");
+                        out.println(".resposta { font-size: 26px; font-weigth: bold; color: #8A0808; line-height: 20px; }");
                     
                     out.println("</style>");
                     
@@ -57,10 +57,10 @@ public class JurosSimples extends HttpServlet {
                         out.println("<h1>Juros Simples</h1>");
 
                         out.println("<hr/>");
-
+                        
                         out.println("<h3 style='color: darkblue;'>J = C . i . t</h3>");
-                        out.println("<h3>Onde:</h3>");
-                        out.println("<h3>J = juros <br/>C = Capital <br/>i = Taxa de Juros <br/>t = Período</h3></div>");
+                        out.println("<h3 style='color: darkblue;'>M = J + C</h3>");
+                        out.println("<h3>J = juros <br/>M = Montante<br/>C = Capital <br/>i = Taxa de Juros <br/>t = Período</h3></div>");
                       
                         out.println("<form class='formulario'>");
                             out.println("<b>Capital</b><input type='text' name='C' />");
@@ -74,9 +74,11 @@ public class JurosSimples extends HttpServlet {
                                 double i = Double.parseDouble(request.getParameter("i"));
                                 double t = Double.parseDouble(request.getParameter("t"));
 
-                                 double J = (C * i * t);
+                                 double J = (C * (i / 100) * t);
+                                 double M = J + C;
 
-                                 out.println("<p class='resposta'>R$  "+J+"</p>");
+                                 out.println("<p class='resposta'>Juros de R$  "+J+"</p>");
+                                 out.println("<p class='resposta'>Montante de R$  "+M+"</p>");
                                          
                             } catch (NumberFormatException ex) {
                                 out.println("<h1 style='color:red';>Erro ao converter os campos</h1>");

@@ -32,7 +32,7 @@ public class JurosCompostos extends HttpServlet {
                     
                      out.println("<style>");
                     
-                        out.println("body { background-color: #BDBDBD; }");
+                        out.println("body { background-color: #BDBDBD;  font-size: 16px; }");
                         out.println(".geral { background-color: #E6E6E6; margin: 15px 180px 0 180px; border: 1px solid darkblue; padding: 10px 80px 20px 80px; font-family: Trebuchet MS; }");
                         out.println("h1 { text-align: center; }");
                         out.println("h2 { margin-left: 60px; color: darkblue; }");
@@ -46,7 +46,7 @@ public class JurosCompostos extends HttpServlet {
                         out.println("h3 { margin-left: 0px; font-size: 22px; line-height: 30px; }");
                         out.println("b { margin-left: 0px; font-size: 22px; }");
                         out.println(".formulario { background-color: #E6E6E6; margin: 10px 180px 0 180px; border: 1px solid darkblue; padding: 10px 10px 40px 40px; font-family: Trebuchet MS; }");
-                        out.println(".resposta { font-size: 32px; font-weigth: bold;  color: #8A0808; }");
+                        out.println(".resposta { font-size: 26px; font-weigth: bold;  color: #8A0808; line-height: 20px; }");
                                          
                     out.println("</style>");                    
 
@@ -73,22 +73,25 @@ public class JurosCompostos extends HttpServlet {
                             try {
                                 double C = Double.parseDouble(request.getParameter("C"));
                                 double i = Double.parseDouble(request.getParameter("i"));
-                                int t = Integer.parseInt(request.getParameter("t"));
+                                double t = Double.parseDouble(request.getParameter("t"));
 
-                                out.println("<br/>");
+                                double M = Math.ceil(C * Math.pow(1 + (i / 100), t));
+                                double J = M - C;
                                 
-                                for (int p = 1; p < t + 1; p++){
-                                   out.println("<b><br/>"+p+"º  mes </b>");                          
-                                   double M = Math.ceil(C * Math.pow(1 + (i / 100), t));
-                                   out.println(" = R$  "+M);
-                                }
-
-                                double montante = Math.ceil(C * Math.pow(1 + (i / 100), t));
-                                out.println("<p class='resposta'>O montante é de R$ "+ montante +"</p>");
-
-                            } catch (Exception ex) {
+                                out.println("<p class='resposta'>Juros de R$  "+J+"</p>");
+                                out.println("<p class='resposta'>Montante de R$  "+M+"</p>");
+                                         
+                            } catch (NumberFormatException ex) {
                                 out.println("<h1 style='color:red';>Erro ao converter os campos</h1>");
                             } 
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                         }
                            out.println("<br/>");
                            out.println("<button style='margin-top: 20px;'><a href='index.html'>Voltar</a></button>"); 
