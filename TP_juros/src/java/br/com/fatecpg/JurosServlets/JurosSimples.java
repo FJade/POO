@@ -33,7 +33,8 @@ public class JurosSimples extends HttpServlet {
                     out.println("<style>");
                     
                         out.println("body { background-color: #BDBDBD; }");
-                        out.println(".geral { background-color: #E6E6E6; margin: 15px 180px 0 180px; border: 1px solid darkblue; padding: 10px 80px 20px 80px; font-family: Trebuchet MS; }");
+                        out.println(".geral { background-color: #E6E6E6; margin: 0px 180px 0 180px; border: 1px solid darkblue; "
+                                + "padding: 10px 80px 20px 80px; font-family: Trebuchet MS; }");
                         out.println("h1 { text-align: center; }");
                         out.println("h2 { margin-left: 60px; color: darkblue; }");
                         out.println("h2 a { text-decoration: none; color: darkblue; font-weight: 500;}");
@@ -45,8 +46,9 @@ public class JurosSimples extends HttpServlet {
                         out.println(".botao:hover { color: #8A0808; }");
                         out.println("h3 { margin-left: 0px; font-size: 22px; line-height: 30px; }");
                         out.println("b { margin-left: 0px; font-size: 22px; }");
-                        out.println(".formulario { background-color: #E6E6E6; margin: 10px 180px 0 180px; border: 1px solid darkblue; padding: 10px 10px 40px 40px; font-family: Trebuchet MS; }");
-                        out.println(".resposta { font-size: 26px; font-weigth: bold; color: #8A0808; line-height: 20px; }");
+                        out.println(".formulario { background-color: #E6E6E6; margin: 10px 180px 40px; 180px; border: 1px solid darkblue; "
+                                + "padding: 10px 10px 40px 40px; font-family: Trebuchet MS; }");
+                        out.println(".resposta { font-size: 20px; font-weigth: bold; color: #8A0808; line-height: 8px; }");
                     
                     out.println("</style>");
                     
@@ -65,27 +67,28 @@ public class JurosSimples extends HttpServlet {
                         out.println("<form class='formulario'>");
                             out.println("<b>Capital</b><input type='text' name='C' />");
                             out.println("<b>Taxa</b><input type='text' name='i'/>");
-                            out.println("<b>Período</b><input type='text' name='t'/>");
+                            out.println("<b>Meses</b><input type='text' name='t'/>");
                             out.println("<input class='botao' type='submit' name='calcular' value='Calcular'/>");
-                        
+                            
                             if (request.getParameter("calcular") != null) {
-                            try {
-                                double C = Double.parseDouble(request.getParameter("C"));
-                                double i = Double.parseDouble(request.getParameter("i"));
-                                double t = Double.parseDouble(request.getParameter("t"));
+                                try {
+                                   double C = Double.parseDouble(request.getParameter("C"));
+                                   double i = Double.parseDouble(request.getParameter("i"));
+                                   double t = Double.parseDouble(request.getParameter("t"));
 
-                                 double J = (C * (i / 100) * t);
-                                 double M = J + C;
+                                   double J = (C * (i / 100) * t);
+                                   double M = J + C;
 
-                                 out.println("<p class='resposta'>Juros de R$  "+J+"</p>");
-                                 out.println("<p class='resposta'>Montante de R$  "+M+"</p>");
-                                         
-                            } catch (NumberFormatException ex) {
-                                out.println("<h1 style='color:red';>Erro ao converter os campos</h1>");
-                            } 
-                        }
-                       out.println("<br/>");
-                       out.println("<button style='margin-top: 20px;'><a href='index.html'>Voltar</a></button>"); 
+                                   out.println("<p class='resposta'>Juros de R$  "+J+"</p>");
+                                   out.println("<p class='resposta'>Montante de R$  "+M+"</p>");
+
+                                } catch (NumberFormatException ex) {
+                                   out.println("<p class=resposta>Erro ao converter os campos</p>");
+                                } 
+                             }
+
+                           out.println("<br/>");
+                           out.println("<button><a href='index.html'>Voltar</a></button>"); 
                        out.println("</form>");                                                                                                            
                 out.println("</body>");
             out.println("</html>");
